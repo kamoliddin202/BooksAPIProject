@@ -2,6 +2,8 @@
 {
     public interface IUnitOfWork : IDisposable
     {
-        Task<>
+        ICategoryInterface categoryInterface {  get; } 
+        IBookInterface bookInterface { get; }
+        Task SaveChangesAsync();
     }
 }

@@ -13,24 +13,28 @@ namespace DataAccessLayer.Repasitories
     public class UnitOfWork : IUnitOfWork
     {
         private readonly AppDbContext _dbContext;
-        private readonly IMapper mapper;
+        private readonly IMapper _mapper;
 
         public UnitOfWork(AppDbContext appDbContext,
-                        IMapper mapper)
+                        IMapper mapper,
+                        ICategoryInterface categoryInterface,
+                        IBookInterface bookInterface)
+                        
         {
             _dbContext = appDbContext;
-            this.mapper = mapper;
+            _mapper = mapper;
+            this.categoryInterface = categoryInterface;
+            this.bookInterface = bookInterface;
         }
-        public IBookInterface Book { get; }
 
-        public ICategoryInterface Category {  get; }
+        public ICategoryInterface categoryInterface { get; }
 
-        public async void Dispose()
-        => await _
+        public IBookInterface bookInterface { get; }
 
-        public Task SaveChangesAsync()
-        {
-            throw new NotImplementedException();
-        }
+        public void Dispose()
+        =>  GC.SuppressFinalize(this);
+
+        public async Task SaveChangesAsync()
+        => await _dbContext.SaveChangesAsync();
     }
 }
