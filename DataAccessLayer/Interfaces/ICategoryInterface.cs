@@ -2,7 +2,7 @@
 
 namespace DataAccessLayer.Interfaces
 {
-    public interface ICategoryInterface
+    public interface ICategoryInterface : IRepasitory<Category>
     {
         Task<IEnumerable<Category>> GetCategoryWithBooks();
     }

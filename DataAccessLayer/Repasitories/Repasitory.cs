@@ -35,13 +35,14 @@ namespace DataAccessLayer.Repasitories
         public async Task<TEntity> GetByIdAsync(int id)
         {
             var entity =  await _dbContext.Set<TEntity>().FindAsync(id);
-            if (entity != null)
+            if (entity == null)
             {
-                return entity;
+                throw new ArgumentNullException(nameof(id));
+
             }
             else
             {
-                throw new ArgumentNullException(nameof(id));
+                return entity;
             }
         }
 
